@@ -8,12 +8,9 @@
  */
 int find_strlen(char *s)
 {
-	int len = 0;
-
-	while (*(s + len))
-		len++;
-
-	return (len);
+	if (*s == '\0')
+		return (0);
+	return (1 + find_strlen(s + 1));
 }
 
 /**
@@ -27,13 +24,11 @@ int find_strlen(char *s)
  */
 int check_palindrome(char *s, int len, int index)
 {
-	if (s[index] == s[len - index - 1])
-	{
-		if (index + 1 == len / 2)
-			return (1);
-		return (check_palindrome(s, len, index + 1));
-	}
-	return (0);
+	if (index >= len / 2)
+		return (1);
+	if (s[index] != s[len - index - 1])
+		return (0);
+	return (check_palindrome(s, len, index + 1));
 }
 
 /**
@@ -51,4 +46,4 @@ int is_palindrome(char *s)
 		return (1);
 
 	return (check_palindrome(s, len, 0));
-}
+}}
